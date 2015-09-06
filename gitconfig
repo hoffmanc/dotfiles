@@ -1,3 +1,7 @@
 [user]
 	email = chris.c.hoffman@gmail.com
 	name = Chris Hoffman
+[interactive]
+  singlekey = true
+[core]
+	excludesfile = /home/sir/.gitignore_global
