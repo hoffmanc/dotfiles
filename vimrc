@@ -31,7 +31,6 @@ set number
 "git clone git://github.com/tpope/vim-rails
 "git clone git://github.com/mileszs/ack.vim
 "git clone git://github.com/scrooloose/nerdcommenter
-"git clone git://github.com/ervandew/supertab
 "git clone git://github.com/kien/ctrlp.vim
 "git clone git://github.com/thoughtbot/vim-rspec
 "git clone git://github.com/godlygeek/tabular
@@ -40,12 +39,12 @@ set number
 filetype plugin indent on
 "set ignorecase
 
-" Configure vim-rspec
-let s:rspec_tmux_command = "tmux send -t primary.0 'rspec --drb {spec}' Enter" 
-let g:rspec_command = "!echo " . s:rspec_tmux_command . " && " . s:rspec_tmux_command
-nnoremap <leader>rr :silent call RunNearestSpec()<CR><c-L>
-nnoremap <leader>rf :silent call RunCurrentSpecFile()<CR><c-L>
-nnoremap <leader>rl :silent call RunLastSpec()<CR><c-L>
+"" Configure vim-rspec
+"let s:rspec_tmux_command = "tmux send -t primary.0 'rspec --drb {spec}' Enter" 
+"let g:rspec_command = "!echo " . s:rspec_tmux_command . " && " . s:rspec_tmux_command
+"nnoremap <leader>rr :silent call RunNearestSpec()<CR><c-L>
+"nnoremap <leader>rf :silent call RunCurrentSpecFile()<CR><c-L>
+"nnoremap <leader>rl :silent call RunLastSpec()<CR><c-L>
 
 " Configure vim-slime
 let g:slime_target = "tmux"
@@ -54,6 +53,7 @@ let g:slime_default_config = {"socket_name": "default", "target_pane": ":2.1"}
 " Ctrl-P settings
 let g:ctrlp_max_height = 20
 set wildignore+=*/tmp/*
+set wildignore+=*/node_modules/*
 
 " Checktime reloads files editted outside vim (git)
 nnoremap <leader>q :checktime
@@ -99,14 +99,14 @@ au BufRead,BufNewFile *.axlsx set filetype=ruby
 au BufRead,BufNewFile *.hamljs set filetype=haml
 
 " toggle red line at 101st character to keep lines under 80 chars
-function! g:ToggleRedline()
-  if(&colorcolumn == 101)
-    set colorcolumn=0
-  else
-    set colorcolumn=101
-  endif
-endfunc
-nnoremap <leader>l :call g:ToggleRedline()<cr>
+"function! g:ToggleRedline()
+  "if(&colorcolumn == 101)
+    "set colorcolumn=0
+  "else
+    "set colorcolumn=101
+  "endif
+"endfunc
+"nnoremap <leader>l :call g:ToggleRedline()<cr>
 
 " Populate args list with files in the quickfix window. Obtained from.. http://stackoverflow.com/questions/5686206/search-replace-using-quickfix-list-in-vim
 command! -nargs=0 -bar Qargs execute 'args ' . QuickfixFilenames()
@@ -142,3 +142,34 @@ endfunction
 nmap <silent> <leader>mn :call MarkWindowSwap()<CR>
 nmap <silent> <leader>ms :call DoWindowSwap()<CR>
 """ END SWAPPING SPLITS """
+
+function! TmuxRun(cmd)
+  exe "silent !tmux send-keys -t 'nl-classic:0.0' C-z " . shellescape(a:cmd) . " Enter" | redraw!
+endfunction
+
+function! RunMinitestAll()
+  let cmd =  "time ruby -Itest" . expand("%")
+  call TmuxRun(cmd)
+  let g:last_minitest_command = cmd
+endfunction
+
+function! RunMinitestLine()
+  let cmd =  "time m " . expand("%") . ":" . line(".")
+  call TmuxRun(cmd)
+  let g:last_minitest_command = cmd
+endfunction
+
+function! RunMinitestLast()
+  call TmuxRun(g:last_minitest_command)
+endfunction
+
+"nnoremap <leader>r :!tmux send-keys -t "nl-classic:0.0" C-z 'time bin/rake test %' Enter<CR><CR>
+"nnoremap <leader>r :!tmux send-keys -t "nl-classic:0.0" C-z 'time ruby -Itest %' Enter<CR><CR>
+nnoremap <leader>l :call RunMinitestLine()<CR>
+nnoremap <leader>r :call RunMinitestAll()<CR>
+nnoremap <leader>R :call RunMinitestLast()<CR>
+
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swap//
+set undodir=~/.vim/undo//
+

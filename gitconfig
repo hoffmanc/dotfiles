@@ -5,3 +5,5 @@
   singlekey = true
 [core]
 	excludesfile = /home/sir/.gitignore_global
+[alias]
+	rc = rebase --continue

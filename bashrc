@@ -82,6 +82,7 @@ if ! shopt -oq posix; then
 fi
 
 export PATH="$HOME/.bin:$PATH"
+export PATH="$HOME/bin:$PATH"
 
 export EDITOR=vi
 export PATH="$HOME/.rbenv/bin:$PATH"
@@ -91,9 +92,20 @@ export PATH="$HOME/.linuxbrew/bin:$PATH"
 export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
 export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
 
+export PATH="$HOME/.local/bin:$PATH"
+
 #if [[ ! $TERM =~ screen ]]; then
   #exec mux default
 #fi
 
 export NVM_DIR="/home/sir/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+trap 'echo "DONE"' 0
+  nvm use --silent stable &
+wait
+
+# locate / updatedb config from http://askubuntu.com/a/93477/40590
+export LOCATE_PATH="$HOME/var/mlocate.db"
+# updatedb -l 0 -o $HOME/var/mlocate.db -U $HOME
+
+source ~/bin/hub.bash_completion.sh
