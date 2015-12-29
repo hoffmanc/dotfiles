@@ -21,6 +21,8 @@ set autoread
 
 set relativenumber
 set number
+set lazyredraw
+set cursorline
 
 " original repos on github
 "git clone git://github.com/tpope/vim-pathogen
@@ -144,11 +146,11 @@ nmap <silent> <leader>ms :call DoWindowSwap()<CR>
 """ END SWAPPING SPLITS """
 
 function! TmuxRun(cmd)
-  exe "silent !tmux send-keys -t 'nl-classic:0.0' C-z " . shellescape(a:cmd) . " Enter" | redraw!
+  exe "silent !tmux send-keys -t ':0.0' C-z " . shellescape(a:cmd) . " Enter" | redraw!
 endfunction
 
 function! RunMinitestAll()
-  let cmd =  "time ruby -Itest" . expand("%")
+  let cmd =  "time ruby -Itest " . expand("%")
   call TmuxRun(cmd)
   let g:last_minitest_command = cmd
 endfunction
@@ -169,7 +171,15 @@ nnoremap <leader>l :call RunMinitestLine()<CR>
 nnoremap <leader>r :call RunMinitestAll()<CR>
 nnoremap <leader>R :call RunMinitestLast()<CR>
 
-set backupdir=~/.vim/backup//
-set directory=~/.vim/swap//
-set undodir=~/.vim/undo//
+set nobackup
+set directory=/tmp/
+set undodir=/tmp/
 
+nmap <leader>p o<ESC>p
+nmap <leader>P o<ESC>P
+
+" Sane Ignore For ctrlp
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|tmp$',
+  \ 'file': '\.exe$\|\.so$\|\.dat$'
+  \ }

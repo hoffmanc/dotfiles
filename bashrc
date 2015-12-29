@@ -16,8 +16,8 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=10000000000
+HISTFILESIZE=2000000000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -109,3 +109,6 @@ export LOCATE_PATH="$HOME/var/mlocate.db"
 # updatedb -l 0 -o $HOME/var/mlocate.db -U $HOME
 
 source ~/bin/hub.bash_completion.sh
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
