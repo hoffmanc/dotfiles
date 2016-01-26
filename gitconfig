@@ -7,3 +7,4 @@
 	excludesfile = /home/sir/.gitignore_global
 [alias]
 	rc = rebase --continue
+  s = status
