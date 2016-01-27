@@ -147,29 +147,40 @@ nmap <silent> <leader>ms :call DoWindowSwap()<CR>
 
 function! TmuxRun(cmd)
   exe "silent !tmux send-keys -t ':0.0' C-z " . shellescape(a:cmd) . " Enter" | redraw!
+  let g:last_minitest_command = a:cmd
 endfunction
 
 function! RunMinitestAll()
   let cmd =  "time ruby -Itest " . expand("%")
   call TmuxRun(cmd)
-  let g:last_minitest_command = cmd
 endfunction
 
 function! RunMinitestLine()
   let cmd =  "time m " . expand("%") . ":" . line(".")
   call TmuxRun(cmd)
-  let g:last_minitest_command = cmd
 endfunction
 
-function! RunMinitestLast()
+function! RunLast()
   call TmuxRun(g:last_minitest_command)
+endfunction
+
+function! RunRailsTestAll()
+  let cmd = "rails test " . expand("%")
+  call TmuxRun(cmd)
+endfunction
+
+function! RunRailsTestLine()
+  let cmd = "rails test " . expand("%") . ":" . line(".")
+  call TmuxRun(cmd)
 endfunction
 
 "nnoremap <leader>r :!tmux send-keys -t "nl-classic:0.0" C-z 'time bin/rake test %' Enter<CR><CR>
 "nnoremap <leader>r :!tmux send-keys -t "nl-classic:0.0" C-z 'time ruby -Itest %' Enter<CR><CR>
 nnoremap <leader>l :call RunMinitestLine()<CR>
 nnoremap <leader>r :call RunMinitestAll()<CR>
-nnoremap <leader>R :call RunMinitestLast()<CR>
+nnoremap <leader>a :call RunRailsTestAll()<CR>
+nnoremap <leader>L :call RunRailsTestLine()<CR>
+nnoremap <leader>R :call RunLast()<CR>
 
 set nobackup
 set directory=/tmp/
