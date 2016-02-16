@@ -149,36 +149,52 @@ function! TmuxRun(cmd)
   let g:last_minitest_command = a:cmd
 endfunction
 
-function! RunMinitestAll()
-  let cmd =  "time ruby -Itest " . expand("%")
-  call TmuxRun(cmd)
-endfunction
-
-function! RunMinitestLine()
-  let cmd =  "time m " . expand("%") . ":" . line(".")
-  call TmuxRun(cmd)
-endfunction
-
 function! RunLast()
   call TmuxRun(g:last_minitest_command)
 endfunction
 
-function! RunRailsTestAll()
-  let cmd = "rails test " . expand("%")
+function! TestType()
+  let rspec = system('grep rspec Gemfile')
+  if empty(rspec)
+    let rails_version = system('rails -v')
+    if empty(matchstr(rails_version, " 5"))
+      return 'rails'
+    else
+      return 'rails5'
+    endif
+  else
+    return 'rspec'
+  end
+endfunction
+
+function! RunAll()
+  let test_type = TestType()
+  if test_type == "rails"
+    let cmd = "ruby -Itest"
+  elseif test_type == "rails5"
+    let cmd = "rails test"
+  else
+    let cmd = "be rspec"
+  endif
+  let cmd = cmd . " " . expand("%")
   call TmuxRun(cmd)
 endfunction
 
-function! RunRailsTestLine()
-  let cmd = "rails test " . expand("%") . ":" . line(".")
+function! RunLine()
+  let test_type = TestType()
+  if test_type == "rails"
+    let cmd = "m"
+  else if test_type == "rails5"
+    let cmd = "rails test"
+  else
+    let cmd = "be rspec"
+  endif
+  let cmd = cmd . " " . expand("%") . ":" . line(".")
   call TmuxRun(cmd)
 endfunction
 
-"nnoremap <leader>r :!tmux send-keys -t "nl-classic:0.0" C-z 'time bin/rake test %' Enter<CR><CR>
-"nnoremap <leader>r :!tmux send-keys -t "nl-classic:0.0" C-z 'time ruby -Itest %' Enter<CR><CR>
-nnoremap <leader>l :call RunMinitestLine()<CR>
-nnoremap <leader>r :call RunMinitestAll()<CR>
-nnoremap <leader>a :call RunRailsTestAll()<CR>
-nnoremap <leader>L :call RunRailsTestLine()<CR>
+nnoremap <leader>l :call RunLine()<CR>
+nnoremap <leader>a :call RunAll()<CR>
 nnoremap <leader>R :call RunLast()<CR>
 
 set nobackup
