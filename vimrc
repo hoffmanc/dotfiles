@@ -56,6 +56,9 @@ let g:slime_default_config = {"socket_name": "default", "target_pane": ":2.1"}
 let g:ctrlp_max_height = 20
 set wildignore+=*/tmp/*
 set wildignore+=*/node_modules/*
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
 
 " Checktime reloads files editted outside vim (git)
 nnoremap <leader>q :checktime
