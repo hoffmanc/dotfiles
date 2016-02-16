@@ -66,10 +66,6 @@ nnoremap <leader>q :checktime
 " Toggle line number Ctrl-N
 nmap <C-N><C-N> :set invnumber<CR>
 
-" Wipetabls
-command Wipetabs :%s/	/  /g
-nnoremap <leader>W :Wipetabs
-
 " Random Leader Commands
 nnoremap <leader>a :tabe\|:Ack 
 nnoremap <leader>g :Git
