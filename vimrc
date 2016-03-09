@@ -154,17 +154,20 @@ function! RunLast()
 endfunction
 
 function! TestType()
-  let rspec = system('grep rspec Gemfile')
-  if empty(rspec)
-    let rails_version = system('rails -v')
-    if empty(matchstr(rails_version, " 5"))
-      return 'rails'
+  if !exists('g:test_type')
+    let rspec = system('grep rspec Gemfile')
+    if empty(rspec)
+      let rails_version = system('rails -v')
+      if empty(matchstr(rails_version, " 5"))
+        let g:test_type = 'rails'
+      else
+        let g:test_type = 'rails5'
+      endif
     else
-      return 'rails5'
-    endif
-  else
-    return 'rspec'
+      let g:test_type = 'rspec'
+    end
   end
+  return g:test_type
 endfunction
 
 function! RunAll()
@@ -184,7 +187,7 @@ function! RunLine()
   let test_type = TestType()
   if test_type == "rails"
     let cmd = "m"
-  else if test_type == "rails5"
+  elseif test_type == "rails5"
     let cmd = "rails test"
   else
     let cmd = "be rspec"
