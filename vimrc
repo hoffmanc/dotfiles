@@ -212,3 +212,6 @@ let g:ctrlp_custom_ignore = {
   \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc$\|public\/images$\|public\/system$\|data$\|log$\|tmp$',
   \ 'file': '\.exe$\|\.so$\|\.dat$'
   \ }
+
+" Kill trailing whitespace
+autocmd FileType c,cpp,java,php,rb,css,js,coffee autocmd BufWritePre <buffer> :%s/\s\+$//e
