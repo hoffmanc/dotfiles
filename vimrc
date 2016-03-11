@@ -42,7 +42,7 @@ filetype plugin indent on
 "set ignorecase
 
 "" Configure vim-rspec
-"let s:rspec_tmux_command = "tmux send -t primary.0 'rspec --drb {spec}' Enter" 
+"let s:rspec_tmux_command = "tmux send -t primary.0 'rspec --drb {spec}' Enter"
 "let g:rspec_command = "!echo " . s:rspec_tmux_command . " && " . s:rspec_tmux_command
 "nnoremap <leader>rr :silent call RunNearestSpec()<CR><c-L>
 "nnoremap <leader>rf :silent call RunCurrentSpecFile()<CR><c-L>
@@ -67,10 +67,10 @@ nnoremap <leader>q :checktime
 nmap <C-N><C-N> :set invnumber<CR>
 
 " Random Leader Commands
-nnoremap <leader>a :tabe\|:Ack 
+nnoremap <leader>a :tabe\|:Ack
 nnoremap <leader>g :Git
 nnoremap <leader>4 :tabclose<CR>
-nnoremap <leader>. :! 
+nnoremap <leader>. :!
 nnoremap <leader>{ :Tabularize /{
 
 " Clear highlighting
@@ -137,7 +137,7 @@ function! DoWindowSwap()
     "Switch to dest and shuffle source->dest
     exe curNum . "wincmd w"
     "Hide and open so that we aren't prompted and keep history
-    exe 'hide buf' markedBuf 
+    exe 'hide buf' markedBuf
 endfunction
 
 nmap <silent> <leader>mn :call MarkWindowSwap()<CR>
@@ -203,6 +203,7 @@ nnoremap <leader>R :call RunLast()<CR>
 set nobackup
 set directory=/tmp/
 set undodir=/tmp/
+set eol
 
 nmap <leader>p o<ESC>p
 nmap <leader>P o<ESC>P
@@ -214,4 +215,4 @@ let g:ctrlp_custom_ignore = {
   \ }
 
 " Kill trailing whitespace
-autocmd FileType c,cpp,java,php,rb,css,js,coffee autocmd BufWritePre <buffer> :%s/\s\+$//e
+autocmd FileType c,cpp,java,php,ruby,css,js,coffee autocmd BufWritePre <buffer> :%s/\s\+$//e
