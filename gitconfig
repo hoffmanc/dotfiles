@@ -1,10 +1,22 @@
 [user]
 	email = chris.c.hoffman@gmail.com
 	name = Chris Hoffman
-[interactive]
-  singlekey = true
 [core]
-	excludesfile = /home/sir/.gitignore_global
+	excludesFile = /home/sir/.gitignore_global
+[interactive]
+  singlekey = true # auto-enter during git add -p
 [alias]
-	rc = rebase --continue
+	rc = rebase --continue # faster rebasing
+  cpc = cherry-pick --continue
   s = status
+  co = checkout
+  cm = commit -m 
+  m = merge
+  p = push origin HEAD # pushes current branch to origin w/ same name
+  pforce = push origin +HEAD
+  b = branch
+  f = fetch
+[push]
+	default = simple # might be required for ^?
+[merge]
+  ff = false
