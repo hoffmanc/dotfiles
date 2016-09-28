@@ -119,3 +119,4 @@ source ~/bin/hub.bash_completion.sh
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+

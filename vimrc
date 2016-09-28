@@ -8,7 +8,7 @@ syntax enable
 let mapleader = ","
 
 set background=dark
-colorscheme solarized
+colorscheme flattened_dark
 set guifont=AndaleMono:h14
 set guioptions-=T
 set hlsearch
@@ -205,6 +205,8 @@ endfunction
 nnoremap <leader>l :call RunLine()<CR>
 nnoremap <leader>a :call RunAll()<CR>
 nnoremap <leader>R :call RunLast()<CR>
+
+nnoremap <silent> <leader>hb :e app/assets/javascripts/backbone/
 
 set nobackup
 set directory=/tmp/
