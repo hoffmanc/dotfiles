@@ -6,6 +6,8 @@
 [interactive]
   singlekey = true # auto-enter during git add -p
 [alias]
+  prune = git remote prune origin
+  r = rebase
 	rc = rebase --continue # faster rebasing
   cpc = cherry-pick --continue
   s = status

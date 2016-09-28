@@ -56,6 +56,7 @@ let g:slime_default_config = {"socket_name": "default", "target_pane": ":2.1"}
 let g:ctrlp_max_height = 20
 set wildignore+=*/tmp/*
 set wildignore+=*/node_modules/*
+set wildignore+=*/lib/thincloud_base/*
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
@@ -156,6 +157,7 @@ endfunction
 function! TestType()
   if !exists('g:test_type')
     let rspec = system('grep rspec Gemfile')
+    let spring_rspec = system('grep spring-commands-rspec Gemfile')
     if empty(rspec)
       let rails_version = system('rails -v')
       if empty(matchstr(rails_version, " 5"))
@@ -164,7 +166,11 @@ function! TestType()
         let g:test_type = 'rails5'
       endif
     else
-      let g:test_type = 'rspec'
+      if empty(spring_rspec)
+        let g:test_type = 'be rspec'
+      else
+        let g:test_type = 'be spring rspec'
+      end
     end
   end
   return g:test_type
@@ -177,7 +183,7 @@ function! RunAll()
   elseif test_type == "rails5"
     let cmd = "rails test"
   else
-    let cmd = "be rspec"
+    let cmd = test_type
   endif
   let cmd = cmd . " " . expand("%")
   call TmuxRun(cmd)
@@ -190,7 +196,7 @@ function! RunLine()
   elseif test_type == "rails5"
     let cmd = "rails test"
   else
-    let cmd = "be rspec"
+    let cmd = test_type
   endif
   let cmd = cmd . " " . expand("%") . ":" . line(".")
   call TmuxRun(cmd)
