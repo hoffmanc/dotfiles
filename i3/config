@@ -170,3 +170,4 @@ bar {
 
 exec setxkbmap -option ctrl:swapcaps
 exec dropbox start
+exec redshift
