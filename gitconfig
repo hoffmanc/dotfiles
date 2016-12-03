@@ -9,6 +9,7 @@
   prune = git remote prune origin
   r = rebase
 	rc = rebase --continue # faster rebasing
+  ri = rebase -i origin/master
   cpc = cherry-pick --continue
   s = status
   co = checkout
@@ -16,8 +17,10 @@
   m = merge
   p = push origin HEAD # pushes current branch to origin w/ same name
   pforce = push origin +HEAD
+  pdel = push origin --delete
   b = branch
-  f = fetch
+  f = fetch -p
+  patch = add -p
 [push]
 	default = simple # might be required for ^?
 [merge]

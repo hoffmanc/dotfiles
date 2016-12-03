@@ -1,7 +1,7 @@
 # ~/.tmuxinator/default.yml
 
-name: react
-root: ~/src/react
+name: purchasology
+root: ~/src/acronymtech/purchasology
 
 # Optional tmux socket
 # socket_name: foo
@@ -10,7 +10,6 @@ root: ~/src/react
 # pre: sudo /etc/rc.d/mysqld start
 
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
-# pre_window: rbenv shell 2.0.0-p247
 pre_window: nvm use stable
 
 # Pass command line options to tmux. Useful for specifying a different tmux.conf.
@@ -34,3 +33,9 @@ windows:
       panes:
         - 
         - vim
+  - logs: 
+      panes:
+        - tail -f log/development.log
+        - tail -f log/test.log
+  - server:
+    - rails s -b 0.0.0.0 -p 7000

@@ -1,7 +1,7 @@
 # ~/.tmuxinator/default.yml
 
-name: react
-root: ~/src/react
+name: times-quiz
+root: ~/src/react/times-quiz
 
 # Optional tmux socket
 # socket_name: foo
@@ -11,7 +11,7 @@ root: ~/src/react
 
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
 # pre_window: rbenv shell 2.0.0-p247
-pre_window: nvm use stable
+pre_window: nvm use 4
 
 # Pass command line options to tmux. Useful for specifying a different tmux.conf.
 # tmux_options: -f ~/.tmux.mac.conf
@@ -34,3 +34,6 @@ windows:
       panes:
         - 
         - vim
+  - server:
+      panes:
+        - npm start
