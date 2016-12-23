@@ -62,7 +62,7 @@ alias be='bundle exec'
 alias migrate='be rake db:migrate && RAILS_ENV=test be rake db:migrate'
 alias rollback='be rake db:rollback && RAILS_ENV=test be rake db:rollback'
 alias redo='be rake db:migrate:redo && RAILS_ENV=test be rake db:migrate:redo'
-alias mppwn='git co master && git fetch && git rebase && git merge - && git p && git b -D - && git p origin --delete -' 
+alias hpr='hub pull-request'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert

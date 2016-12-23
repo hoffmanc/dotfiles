@@ -56,10 +56,16 @@ let g:slime_default_config = {"socket_name": "default", "target_pane": ":2.1"}
 let g:ctrlp_max_height = 20
 set wildignore+=*/tmp/*
 set wildignore+=*/node_modules/*
-set wildignore+=*/lib/thincloud_base/*
-if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-endif
+set wildignore+=*/lib/thincloud*/*
+"if executable('ag')
+  "let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+"endif
+
+" Sane Ignore For ctrlp
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc$\|public\/images$\|public\/system$\|data$\|log$\|tmp\|lib\/thincloud_base',
+  \ 'file': '\.exe$\|\.so$\|\.dat$'
+  \ }
 
 " Checktime reloads files editted outside vim (git)
 nnoremap <leader>q :checktime
@@ -215,12 +221,6 @@ set eol
 
 nmap <leader>p o<ESC>p
 nmap <leader>P o<ESC>P
-
-" Sane Ignore For ctrlp
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc$\|public\/images$\|public\/system$\|data$\|log$\|tmp\|lib\/thincloud_base',
-  \ 'file': '\.exe$\|\.so$\|\.dat$'
-  \ }
 
 " Kill trailing whitespace
 autocmd FileType c,cpp,java,php,ruby,css,js,coffee autocmd BufWritePre <buffer> :%s/\s\+$//e

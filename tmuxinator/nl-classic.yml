@@ -38,5 +38,6 @@ windows:
         - tail -f log/development.log
         - tail -f log/test.log
   - server:
-    - rails s
-    - be rake jobs:work
+      panes:
+        - rails s
+        - be rake jobs:work
