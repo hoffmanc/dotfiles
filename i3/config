@@ -168,7 +168,9 @@ bar {
         tray_output primary
 }
 
-exec synergyc 192.168.1.132
-exec setxkbmap -option ctrl:swapcaps
-exec dropbox start
-exec redshift
+exec --no-startup-id setxkbmap -option ctrl:swapcaps
+exec --no-startup-id dropbox start
+exec --no-startup-id redshift
+exec --no-startup-id nm-applet
+exec --no-startup-id synclient AreaLeftEdge=50 AreaRightEdge=3199
+exec --no-startup-id synergyc 192.168.1.132

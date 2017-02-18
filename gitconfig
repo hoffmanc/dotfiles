@@ -20,6 +20,7 @@
   pdel = push origin --delete
   b = branch
   f = fetch -p
+  url =! bash -c 'git config --get remote.origin.url | sed -E "s/.+:\\(.+\\)\\.git$/https:\\\\/\\\\/github\\\\.com\\\\/\\\\1/g"'
   patch = add -p
 [push]
 	default = simple # might be required for ^?
