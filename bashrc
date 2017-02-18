@@ -63,6 +63,8 @@ alias migrate='be rake db:migrate && RAILS_ENV=test be rake db:migrate'
 alias rollback='be rake db:rollback && RAILS_ENV=test be rake db:rollback'
 alias redo='be rake db:migrate:redo && RAILS_ENV=test be rake db:migrate:redo'
 alias hpr='hub pull-request'
+alias pw='tmuxinator start practicewell'
+alias classic='tmuxinator start classic'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -128,3 +130,5 @@ PERL_MB_OPT="--install_base \"/home/sir/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/sir/perl5"; export PERL_MM_OPT;
 
 export NO_AT_BRIDGE=1 # http://unix.stackexchange.com/questions/230238/starting-x-applications-from-the-terminal-and-the-warnings-that-follow
+
+export TERMINFO=~/.terminfo

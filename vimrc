@@ -185,7 +185,8 @@ endfunction
 function! RunAll()
   let test_type = TestType()
   if test_type == "rails"
-    let cmd = "ruby -Itest"
+    "let cmd = "ruby -Itest"
+    let cmd = "bin/rake test"
   elseif test_type == "rails5"
     let cmd = "rails test"
   else
@@ -211,6 +212,13 @@ endfunction
 nnoremap <leader>l :call RunLine()<CR>
 nnoremap <leader>a :call RunAll()<CR>
 nnoremap <leader>R :call RunLast()<CR>
+
+function! GemDoc()
+  let wordUnderCursor = expand("<cword>")
+  exe "silent !launchy https://rubygems.org/gems/" . wordUnderCursor | redraw!
+endfunction
+
+nnoremap <leader>sg :call GemDoc()<CR>
 
 nnoremap <silent> <leader>hb :e app/assets/javascripts/backbone/
 
