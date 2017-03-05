@@ -132,3 +132,6 @@ PERL_MM_OPT="INSTALL_BASE=/home/sir/perl5"; export PERL_MM_OPT;
 export NO_AT_BRIDGE=1 # http://unix.stackexchange.com/questions/230238/starting-x-applications-from-the-terminal-and-the-warnings-that-follow
 
 export TERMINFO=~/.terminfo
+
+export R_HISTFILE="$HOME/.Rhistory"
+
