@@ -230,5 +230,8 @@ set eol
 nmap <leader>p o<ESC>p
 nmap <leader>P o<ESC>P
 
+let g:elm_format_autosave = 1
+
+
 " Kill trailing whitespace
 autocmd FileType c,cpp,java,php,ruby,css,js,coffee autocmd BufWritePre <buffer> :%s/\s\+$//e
