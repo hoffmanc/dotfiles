@@ -16,8 +16,10 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=10000000000
-HISTFILESIZE=2000000000
+export HISTFILE=$HOME/.bash_history
+export HISTSIZE=10000000000
+export HISTFILESIZE=2000000000
+export PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
