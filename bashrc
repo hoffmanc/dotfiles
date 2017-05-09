@@ -104,6 +104,8 @@ export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
 export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
 
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.nvm/versions/node/v7.8.0/bin:$PATH"
+
 
 #if [[ ! $TERM =~ screen ]]; then
   #exec mux default
