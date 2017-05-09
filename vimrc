@@ -57,9 +57,9 @@ let g:ctrlp_max_height = 20
 set wildignore+=*/tmp/*
 set wildignore+=*/node_modules/*
 set wildignore+=*/lib/thincloud*/*
-"if executable('ag')
-  "let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-"endif
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
 
 " Sane Ignore For ctrlp
 let g:ctrlp_custom_ignore = {
