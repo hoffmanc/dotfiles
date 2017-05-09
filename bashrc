@@ -114,7 +114,7 @@ export PATH="$HOME/.nvm/versions/node/v7.8.0/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 trap 'echo "DONE"' 0
-  nvm use --silent stable &
+  nvm use stable &
 wait
 
 # locate / updatedb config from http://askubuntu.com/a/93477/40590
