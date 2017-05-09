@@ -26,3 +26,5 @@
 	default = simple # might be required for ^?
 [merge]
   ff = false
+[init]
+	templatedir = ~/.git-templates
