@@ -4,12 +4,19 @@ set nocompatible
 filetype off
 syntax enable
 
-" Set , to be leader key
+" Set , as leader key
 let mapleader = ","
 
-set termguicolors
+" set true colors
+if has("termguicolors")
+  set t_8f=[38;2;%lu;%lu;%lum
+  set t_8b=[48;2;%lu;%lu;%lum
+  set termguicolors
+endif
+
 colorscheme gruvbox
-set guifont=AndaleMono:h14
+
+" disable toolbar
 set guioptions-=T
 set hlsearch
 set backspace=2
