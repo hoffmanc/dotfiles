@@ -6,7 +6,8 @@
 [interactive]
   singlekey = true # auto-enter during git add -p
 [alias]
-  prune = git remote prune origin
+  a = add
+  prune = remote prune origin
   r = rebase
 	rc = rebase --continue # faster rebasing
   ri = rebase -i origin/master
@@ -22,6 +23,7 @@
   f = fetch -p
   url =! bash -c 'git config --get remote.origin.url | sed -E "s/.+:\\(.+\\)\\.git$/https:\\\\/\\\\/github\\\\.com\\\\/\\\\1/g"'
   patch = add -p
+  resume = reset HEAD^
 [push]
 	default = simple # might be required for ^?
 [merge]

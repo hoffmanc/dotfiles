@@ -15,6 +15,7 @@ if has("termguicolors")
 endif
 
 colorscheme gruvbox
+set background=dark
 
 " disable toolbar
 set guioptions-=T
@@ -75,6 +76,8 @@ au BufRead,BufNewFile *.thor set filetype=ruby
 au BufRead,BufNewFile *.rabl set filetype=ruby
 au BufRead,BufNewFile *.axlsx set filetype=ruby
 au BufRead,BufNewFile *.hamljs set filetype=haml
+au BufRead,BufNewFile *.inky let b:eruby_subtype='html'
+au BufRead,BufNewFile *.inky set filetype=eruby 
 
 " toggle red line at 101st character to keep lines under 80 chars
 function! g:ToggleRedline()

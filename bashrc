@@ -61,12 +61,13 @@ alias l='ls -CF'
 alias r='rails'
 alias g='git'
 alias be='bundle exec'
-alias migrate='bin/rake db:migrate && RAILS_ENV=test bin/rake db:migrate'
-alias rollback='bin/rake db:rollback && RAILS_ENV=test bin/rake db:rollback'
-alias redo='bin/rake db:migrate:redo && RAILS_ENV=test bin/rake db:migrate:redo'
+alias migrate='rails db:migrate && rails db:test:prepare'
+alias rollback='rails db:rollback && RAILS_ENV=test rails db:rollback'
+alias redo='rails db:migrate:redo && RAILS_ENV=test rails db:migrate:redo'
 alias hpr='hub pull-request'
 alias pw='tmuxinator start practicewell'
 alias classic='tmuxinator start classic'
+alias elm='docker run -it --rm -v "$(pwd):/code" -w "/code" -e "HOME=/tmp" -u $UID:$GID -p 8000:8000 elm'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -127,11 +128,11 @@ source ~/bin/hub.bash_completion.sh
 export PATH="/usr/local/heroku/bin:$PATH"
 
 
-PATH="/home/sir/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="/home/sir/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/home/sir/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/home/sir/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/home/sir/perl5"; export PERL_MM_OPT;
+PATH="$HOME/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="$HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"$HOME/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
 
 export NO_AT_BRIDGE=1 # http://unix.stackexchange.com/questions/230238/starting-x-applications-from-the-terminal-and-the-warnings-that-follow
 
