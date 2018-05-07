@@ -122,7 +122,7 @@ wait
 export LOCATE_PATH="$HOME/var/mlocate.db"
 # updatedb -l 0 -o $HOME/var/mlocate.db -U $HOME
 
-source ~/bin/hub.bash_completion.sh
+[ -s "~/bin/hub.bash_completion.sh" ] && source ~/bin/hub.bash_completion.sh
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
@@ -140,3 +140,4 @@ export TERMINFO=~/.terminfo
 
 export R_HISTFILE="$HOME/.Rhistory"
 
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
