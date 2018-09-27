@@ -3,6 +3,8 @@
 	name = Chris Hoffman
 [core]
 	excludesFile = /home/sir/.gitignore_global
+	eol = lf
+	autocrlf = false
 [interactive]
   singlekey = true # auto-enter during git add -p
 [alias]

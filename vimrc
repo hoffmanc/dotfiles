@@ -1,5 +1,6 @@
 execute pathogen#infect()
 
+set hidden
 set nocompatible
 filetype off
 syntax enable
@@ -78,6 +79,7 @@ au BufRead,BufNewFile *.axlsx set filetype=ruby
 au BufRead,BufNewFile *.hamljs set filetype=haml
 au BufRead,BufNewFile *.inky let b:eruby_subtype='html'
 au BufRead,BufNewFile *.inky set filetype=eruby 
+au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
 
 " toggle red line at 101st character to keep lines under 80 chars
 function! g:ToggleRedline()
@@ -123,9 +125,9 @@ function! TestType()
       endif
     else
       if empty(spring_rspec)
-        let g:test_type = 'be rspec'
+        let g:test_type = 'bundle exec rspec'
       else
-        let g:test_type = 'be spring rspec'
+        let g:test_type = 'bundle exec rspec'
       end
     end
   end
@@ -163,6 +165,22 @@ nnoremap <leader>l :call RunLine()<CR>
 nnoremap <leader>a :call RunAll()<CR>
 nnoremap <leader>R :call RunLast()<CR>
 
+function! Migrate()
+  call TmuxRun("rails db:migrate && RAILS_ENV=test rails db:migrate")
+endfunction
+
+function! Rollback()
+  call TmuxRun("rails db:rollback && RAILS_ENV=test rails db:rollback")
+endfunction
+
+function! Redo()
+  call TmuxRun("rails db:migrate:redo && RAILS_ENV=test rails db:migrate:redo")
+endfunction
+
+nnoremap <leader>rm :call Migrate()<CR>
+nnoremap <leader>rr :call Rollback()<CR>
+nnoremap <leader>re :call Redo()<CR>
+
 function! GemDoc()
   let wordUnderCursor = expand("<cword>")
   exe "silent !launchy https://rubygems.org/gems/" . wordUnderCursor | redraw!
@@ -181,4 +199,4 @@ nmap <leader>P o<ESC>P
 let g:elm_format_autosave = 1
 
 " Kill trailing whitespace
-autocmd FileType c,cpp,java,php,ruby,css,js,coffee autocmd BufWritePre <buffer> :%s/\s\+$//e
+autocmd FileType c,cpp,java,php,ruby,css,js,javascript.jsx,coffee autocmd BufWritePre <buffer> :%s/\s\+$//e

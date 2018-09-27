@@ -73,6 +73,12 @@ alias elm='docker run -it --rm -v "$(pwd):/code" -w "/code" -e "HOME=/tmp" -u $U
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
+export DOCKER_COMPOSE_YML=~/src/alta/alta-dock/docker-compose.yml
+alias dk="docker-compose --file=$DOCKER_COMPOSE_YML"
+alias dkm="docker-compose -f $DOCKER_COMPOSE_YML -f /Users/steve/src/alta-dock/mfg-docker-compose.yml -f /Users/steve/src/alta-dock/mfg-docker-compose.dev.yml "
+alias llog="docker logs --tail=300 -f altadock_login_1"
+alias olog="docker logs --tail=300 -f altadock_owner_portal_1"
+
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
@@ -95,10 +101,9 @@ fi
 
 export PATH="$HOME/.bin:$PATH"
 export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.rbenv/bin:$PATH"
 
 export EDITOR=vi
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
 
 export PATH="$HOME/.linuxbrew/bin:$PATH"
 export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
@@ -127,7 +132,6 @@ export LOCATE_PATH="$HOME/var/mlocate.db"
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
-
 PATH="$HOME/perl5/bin${PATH:+:${PATH}}"; export PATH;
 PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
 PERL_LOCAL_LIB_ROOT="$HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
@@ -140,4 +144,14 @@ export TERMINFO=~/.terminfo
 
 export R_HISTFILE="$HOME/.Rhistory"
 
+export DOCKER_CLIENT_TIMEOUT=120
+
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/hoffmanc/Downloads/google-cloud-sdk/path.bash.inc' ]; then source '/home/hoffmanc/Downloads/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/hoffmanc/Downloads/google-cloud-sdk/completion.bash.inc' ]; then source '/home/hoffmanc/Downloads/google-cloud-sdk/completion.bash.inc'; fi
+
+eval "$(rbenv init -)"

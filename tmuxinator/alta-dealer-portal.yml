@@ -1,0 +1,40 @@
+# ~/.tmuxinator/default.yml
+
+name: alta-dealer-portal
+root: ~/src/alta/alta-dealer-portal
+
+# Optional tmux socket
+# socket_name: foo
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+pre_window: nvm use stable
+
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+# tmux_options: -f ~/.tmux.mac.conf
+
+# Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
+# tmux_command: byobu
+
+# Specifies (by name or index) which window will be selected on project startup. If not set, the first window is used.
+# startup_window: logs
+
+# Controls whether the tmux session should be attached to automatically. Defaults to true.
+# attach: false
+
+# Runs after everything. Use it to attach to tmux with custom options etc.
+# post: tmux -CC attach -t default
+
+windows:
+  - editor:
+      pre: dk up -d dealer_portal
+      layout: 672f,271x66,0,0{80x66,0,0[80x33,0,0,0,80x32,0,34,4],190x66,81,0,3}
+      panes:
+        - dbash:
+          - dbash dealer_portal
+          - clear
+        - bash:
+          - clear
+        - editor:
+          - vim
+  - server:
+    - while true; do docker logs -f altadock_dealer_portal_1; done
