@@ -73,11 +73,8 @@ alias elm='docker run -it --rm -v "$(pwd):/code" -w "/code" -e "HOME=/tmp" -u $U
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-export DOCKER_COMPOSE_YML=~/src/alta/alta-dock/docker-compose.yml
-alias dk="docker-compose --file=$DOCKER_COMPOSE_YML"
-alias dkm="docker-compose -f $DOCKER_COMPOSE_YML -f /Users/steve/src/alta-dock/mfg-docker-compose.yml -f /Users/steve/src/alta-dock/mfg-docker-compose.dev.yml "
-alias llog="docker logs --tail=300 -f altadock_login_1"
-alias olog="docker logs --tail=300 -f altadock_owner_portal_1"
+alias dk="docker-compose"
+alias rlog="docker logs --tail=300 -f medu-relier_app_1"
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -92,7 +89,9 @@ fi
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
 if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
+  if [ -f /usr/local/etc/bash_completion ]; then
+    . /usr/local/etc/bash_completion
+  elif [ -f /usr/share/bash-completion/bash_completion ]; then
     . /usr/share/bash-completion/bash_completion
   elif [ -f /etc/bash_completion ]; then
     . /etc/bash_completion

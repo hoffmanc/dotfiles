@@ -32,10 +32,11 @@ set cursorline
 
 filetype plugin indent on
 
-" Ctrl-P settings
+" Ctrl-P and ack.vim settings
 let g:ctrlp_max_height = 20
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  let g:ackprg = 'ag --vimgrep'
 endif
 
 " Sane Ignore For ctrlp
@@ -200,3 +201,6 @@ let g:elm_format_autosave = 1
 
 " Kill trailing whitespace
 autocmd FileType c,cpp,java,php,ruby,css,js,javascript.jsx,coffee autocmd BufWritePre <buffer> :%s/\s\+$//e
+
+" Enable rufo (RUby FOrmat)
+let g:rufo_auto_formatting = 1
