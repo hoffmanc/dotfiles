@@ -1,0 +1,46 @@
+# ~/.tmuxinator/default.yml
+
+name: medu-relier
+root: ~/src/medu-relier
+
+# Optional tmux socket
+# socket_name: foo
+
+# Runs before everything. Use it to start daemons etc.
+on_project_first_start: docker-compose up -d
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+# pre_window: nvm use stable
+
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+# tmux_options: -f ~/.tmux.mac.conf
+
+# Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
+# tmux_command: byobu
+
+# Specifies (by name or index) which window will be selected on project startup. If not set, the first window is used.
+# startup_window: logs
+
+# Controls whether the tmux session should be attached to automatically. Defaults to true.
+# attach: false
+
+# Runs after everything. Use it to attach to tmux with custom options etc.
+# post: tmux -CC attach -t default
+
+windows:
+  - editor:
+      layout: 672f,271x66,0,0{80x66,0,0[80x33,0,0,0,80x32,0,34,4],190x66,81,0,3}
+      panes:
+        - dbash:
+          - docker-compose exec app bash
+          - clear
+        - bash:
+          - clear
+        - editor:
+          - vim
+  - logs: 
+      panes:
+        - tail -f log/development.log
+        - tail -f log/test.log
+  - server:
+    - while true; do docker logs -f medu-relier_app_1; done
