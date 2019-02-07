@@ -1,10 +1,13 @@
 # ~/.tmuxinator/default.yml
 
-name: alta-owner-react
-root: ~/src/alta/alta-owner-react
+name: rental
+root: ~/src/rental
 
 # Optional tmux socket
 # socket_name: foo
+
+# Runs before everything. Use it to start daemons etc.
+# pre: sudo /etc/rc.d/mysqld start
 
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
 pre_window: nvm use stable
@@ -28,11 +31,13 @@ windows:
   - editor:
       layout: main-vertical
       panes:
-        - bash:
-          - clear
-        - editor:
-          - vim
+        - 
+        - vim
+  - logs: 
+      panes:
+        - tail -f log/development.log
+        - tail -f log/test.log
   - server:
       panes:
-        - dk up -d owner_react
-        - while true; do docker logs -f altadock_owner_react_1; done
+        - rails s -b 0.0.0.0
+        - be rake jobs:work

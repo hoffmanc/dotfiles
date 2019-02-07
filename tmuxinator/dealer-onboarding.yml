@@ -1,13 +1,10 @@
 # ~/.tmuxinator/default.yml
 
-name: nl-classic
-root: ~/src/newleaders/classic
+name: dealer-onboarding
+root: ~/src/alta/dealer-onboarding
 
 # Optional tmux socket
 # socket_name: foo
-
-# Runs before everything. Use it to start daemons etc.
-# pre: sudo /etc/rc.d/mysqld start
 
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
 pre_window: nvm use stable
@@ -31,13 +28,24 @@ windows:
   - editor:
       layout: main-vertical
       panes:
-        - 
-        - vim
-  - logs: 
-      panes:
-        - tail -f log/development.log
-        - tail -f log/test.log
+        - bash:
+          - clear
+        - editor:
+          - vim
   - server:
+    - npm start
+  - redux_saga_firebase_example:
+      pre:
+        - cd ~/src/redux-saga-firebase/example
+      layout: main-vertical
       panes:
-        - rails s -b 0.0.0.0
-        - be rake jobs:work
+        - bash:
+          - clear
+        - editor:
+          - vim
+  - example_server:
+      pre:
+        - cd ~/src/redux-saga-firebase/example
+      panes:
+        - example_server:
+            - yarn dev 
