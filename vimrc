@@ -41,7 +41,7 @@ endif
 
 " Sane Ignore For ctrlp
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc$\|public\/images$\|public\/system$\|data$\|log$\|tmp\|lib\/thincloud_base',
+  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc$\|public\/images$\|public\/system$\|data$\|log$\|tmp\|lib\/thincloud_base\|vendor',
   \ 'file': '\.exe$\|\.so$\|\.dat$'
   \ }
 
@@ -139,13 +139,13 @@ function! RunAll()
   let test_type = TestType()
   if test_type == "rails"
     "let cmd = "ruby -Itest"
-    let cmd = "bin/rake test"
+    let cmd = "bin/rake test TEST="
   elseif test_type == "rails5"
-    let cmd = "rails test"
+    let cmd = "rails test TEST="
   else
     let cmd = test_type
   endif
-  let cmd = cmd . " " . expand("%")
+  let cmd = cmd . expand("%")
   call TmuxRun(cmd)
 endfunction
 
@@ -189,11 +189,17 @@ endfunction
 
 nnoremap <leader>sg :call GemDoc()<CR>
 
-set nobackup
-set directory=/tmp/
-set undodir=/tmp/
+
+set directory=~/.vim/swap//
+set backupdir=~/.vim/backup//
+set undofile
+set undodir=~/.vim/undo//
 set eol
 
+set undolevels=1000
+set undoreload=10000
+
+" force newline when putting yanked inline strings
 nmap <leader>p o<ESC>p
 nmap <leader>P o<ESC>P
 

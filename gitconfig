@@ -6,7 +6,8 @@
 	eol = lf
 	autocrlf = false
 [interactive]
-  singlekey = true # auto-enter during git add -p
+  # need to run `sudo cpan Term::ReadKey` to install required dependency
+	singleKey = yes
 [alias]
   a = add
   prune = remote prune origin
