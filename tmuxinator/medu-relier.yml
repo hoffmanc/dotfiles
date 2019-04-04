@@ -7,7 +7,7 @@ root: ~/src/medu-relier
 # socket_name: foo
 
 # Runs before everything. Use it to start daemons etc.
-on_project_first_start: docker-compose up -d
+#on_project_first_start: docker-compose up -d
 
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
 # pre_window: nvm use stable
@@ -40,7 +40,10 @@ windows:
           - vim
   - logs: 
       panes:
-        - tail -f log/development.log
-        - tail -f log/test.log
+        - while true; do docker-compose exec app tail -f log/development.log; sleep 5; done
+        - while true; do docker-compose exec app tail -f log/test.log; sleep 5; done
   - server:
-    - while true; do docker logs -f medu-relier_app_1; done
+      layout: even-vertical
+      panes:
+        - docker-sync-stack start
+        - docker stats

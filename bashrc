@@ -100,7 +100,6 @@ fi
 
 export PATH="$HOME/.bin:$PATH"
 export PATH="$HOME/bin:$PATH"
-export PATH="$HOME/.rbenv/bin:$PATH"
 
 export EDITOR=vi
 
@@ -109,18 +108,18 @@ export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
 export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
 
 export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/.nvm/versions/node/v7.8.0/bin:$PATH"
+#export PATH="$HOME/.nvm/versions/node/v7.8.0/bin:$PATH"
 
 
 #if [[ ! $TERM =~ screen ]]; then
   #exec mux default
 #fi
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-trap 'echo "DONE"' 0
-  nvm use stable &
-wait
+#export NVM_DIR="$HOME/.nvm"
+#[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+#trap 'echo "DONE"' 0
+  #nvm use stable &
+#wait
 
 # locate / updatedb config from http://askubuntu.com/a/93477/40590
 export LOCATE_PATH="$HOME/var/mlocate.db"
@@ -153,4 +152,8 @@ if [ -f '/home/hoffmanc/Downloads/google-cloud-sdk/path.bash.inc' ]; then source
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/hoffmanc/Downloads/google-cloud-sdk/completion.bash.inc' ]; then source '/home/hoffmanc/Downloads/google-cloud-sdk/completion.bash.inc'; fi
 
+export PATH="$HOME/go/bin:$PATH"
+
 eval "$(rbenv init -)"
+export PATH="/usr/local/opt/qt/bin:$PATH"
+export PATH="/usr/local/opt/mysql-client/bin:$PATH"

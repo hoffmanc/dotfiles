@@ -36,6 +36,7 @@ filetype plugin indent on
 let g:ctrlp_max_height = 20
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
   let g:ackprg = 'ag --vimgrep'
 endif
 
@@ -49,7 +50,7 @@ let g:ctrlp_custom_ignore = {
 nnoremap <leader>q :checktime<CR>
 
 " Random Leader Commands
-nnoremap <leader>a :tabe\|:Ag
+nnoremap <leader>g :tabe\|:Ag
 nnoremap <leader>{ :Tabularize /{
 
 " Clear highlighting
@@ -72,7 +73,6 @@ set tabstop=2
 au FileType html setlocal shiftwidth=2 tabstop=2
 au FileType javascript setlocal shiftwidth=2 tabstop=2
 au FileType coffee setlocal shiftwidth=2 tabstop=2
-au FileType cucumber setlocal shiftwidth=2 tabstop=2
 au FileType ruby setlocal shiftwidth=2 tabstop=2
 au BufRead,BufNewFile *.thor set filetype=ruby
 au BufRead,BufNewFile *.rabl set filetype=ruby
@@ -167,15 +167,15 @@ nnoremap <leader>a :call RunAll()<CR>
 nnoremap <leader>R :call RunLast()<CR>
 
 function! Migrate()
-  call TmuxRun("rails db:migrate && RAILS_ENV=test rails db:migrate")
+  call TmuxRun("rake db:migrate && RAILS_ENV=test rake db:migrate")
 endfunction
 
 function! Rollback()
-  call TmuxRun("rails db:rollback && RAILS_ENV=test rails db:rollback")
+  call TmuxRun("rake db:rollback && RAILS_ENV=test rake db:rollback")
 endfunction
 
 function! Redo()
-  call TmuxRun("rails db:migrate:redo && RAILS_ENV=test rails db:migrate:redo")
+  call TmuxRun("rake db:migrate:redo && RAILS_ENV=test rake db:migrate:redo")
 endfunction
 
 nnoremap <leader>rm :call Migrate()<CR>
@@ -206,7 +206,4 @@ nmap <leader>P o<ESC>P
 let g:elm_format_autosave = 1
 
 " Kill trailing whitespace
-autocmd FileType c,cpp,java,php,ruby,css,js,javascript.jsx,coffee autocmd BufWritePre <buffer> :%s/\s\+$//e
-
-" Enable rufo (RUby FOrmat)
-let g:rufo_auto_formatting = 1
+autocmd FileType c,cpp,java,php,ruby,css,js,javascript.jsx,coffee,dockerfile autocmd BufWritePre <buffer> :%s/\s\+$//e
