@@ -194,5 +194,4 @@ bindsym XF86AudioPause exec playerctl pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
-exec --no-startup-id xrandr | grep 'DP-2 connected' && xrandr --output eDP-1 --auto --output DP-2 --auto --above eDP-1
-exec --no-startup-id xrandr | grep 'HDMI-1 connected' && xrandr --output eDP-1 --auto --output HDMI-1 --auto --above eDP-1
+exec --no-startup-id setup_monitors

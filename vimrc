@@ -16,7 +16,6 @@ if has("termguicolors")
 endif
 
 colorscheme gruvbox
-set background=dark
 
 " disable toolbar
 set guioptions-=T
@@ -32,19 +31,27 @@ set cursorline
 
 filetype plugin indent on
 
-" Ctrl-P and ack.vim settings
-let g:ctrlp_max_height = 20
-if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-  let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-  let g:ackprg = 'ag --vimgrep'
-endif
+let g:wakatime_ScreenRedraw = 1
+"
+"
+" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+" ag is fast enough that CtrlP doesn't need to cache
+let g:ctrlp_use_caching = 0
 
-" Sane Ignore For ctrlp
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc$\|public\/images$\|public\/system$\|data$\|log$\|tmp\|lib\/thincloud_base\|vendor',
-  \ 'file': '\.exe$\|\.so$\|\.dat$'
-  \ }
+"" Ctrl-P and ack.vim settings
+"let g:ctrlp_max_height = 20
+"if executable('ag')
+  "let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  "let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+  "let g:ackprg = 'ag --vimgrep'
+"endif
+
+"" Sane Ignore For ctrlp
+"let g:ctrlp_custom_ignore = {
+  "\ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc$\|public\/images$\|public\/system$\|data$\|log$\|tmp\|lib\/thincloud_base\|vendor',
+  "\ 'file': '\.exe$\|\.so$\|\.dat$'
+  "\ }
 
 " Checktime reloads files editted outside vim (git)
 nnoremap <leader>q :checktime<CR>
@@ -126,9 +133,9 @@ function! TestType()
       endif
     else
       if empty(spring_rspec)
-        let g:test_type = 'bundle exec rspec'
+        let g:test_type = 'bundle exec rspec '
       else
-        let g:test_type = 'bundle exec rspec'
+        let g:test_type = 'bundle exec rspec '
       end
     end
   end
@@ -207,3 +214,4 @@ let g:elm_format_autosave = 1
 
 " Kill trailing whitespace
 autocmd FileType c,cpp,java,php,ruby,css,js,javascript.jsx,coffee,dockerfile autocmd BufWritePre <buffer> :%s/\s\+$//e
+set background=dark

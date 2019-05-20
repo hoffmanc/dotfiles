@@ -35,7 +35,7 @@ windows:
           - docker-compose exec app bash
           - clear
         - bash:
-          - clear
+          - while true; do docker logs -f medu-relier_app_1 || docker logs -f medurelier_app_1; done
         - editor:
           - vim
   - logs: 
@@ -43,7 +43,7 @@ windows:
         - while true; do docker-compose exec app tail -f log/development.log; sleep 5; done
         - while true; do docker-compose exec app tail -f log/test.log; sleep 5; done
   - server:
-      layout: even-vertical
+      layout: 4705,363x97,0,0{181x97,0,0,2,181x97,182,0,6}
       panes:
         - docker-sync-stack start
         - docker stats
