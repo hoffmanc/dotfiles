@@ -1,6 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
-let g:netrw_dirhist_1='/Users/choffman/src/medu-relier/client/app/components'
-let g:netrw_dirhist_2='/Users/choffman/src/medu-relier/client/app/startup'
-let g:netrw_dirhist_3='/Users/choffman/src/medu-relier/app/views/document_sets'
-let g:netrw_dirhist_4='/Users/choffman/src/medu-relier/app/interactors'
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/home/hoffmanc/src/medu-relier/spec/cassettes/CreateOrUpdateDocumentInteractor/_call/document_last_release_date'
+let g:netrw_dirhist_2='/home/hoffmanc/src/medu-relier/spec/cassettes/CreateOrUpdateDocumentInteractor/_call/document_last_release_date/update'
+let g:netrw_dirhist_3='/home/hoffmanc/src/medu-relier/db/migrate'

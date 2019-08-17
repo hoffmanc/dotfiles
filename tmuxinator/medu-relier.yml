@@ -45,5 +45,5 @@ windows:
   - server:
       layout: 4705,363x97,0,0{181x97,0,0,2,181x97,182,0,6}
       panes:
-        - docker-sync-stack start
+        - dk up -d 
         - docker stats

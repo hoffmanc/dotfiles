@@ -154,7 +154,9 @@ if [ -f '/home/hoffmanc/Downloads/google-cloud-sdk/completion.bash.inc' ]; then 
 
 export PATH="$HOME/go/bin:$PATH"
 
-eval "$(rbenv init -)"
 export PATH="/usr/local/opt/qt/bin:$PATH"
 export PATH="/usr/local/opt/mysql-client/bin:$PATH"
 export PATH="/snap/bin:$PATH"
+export PATH="$HOME/.rbenv/bin:$PATH"
+
+eval "$(rbenv init -)"
