@@ -65,9 +65,7 @@ alias migrate='rails db:migrate && rails db:test:prepare'
 alias rollback='rails db:rollback && RAILS_ENV=test rails db:rollback'
 alias redo='rails db:migrate:redo && RAILS_ENV=test rails db:migrate:redo'
 alias hpr='hub pull-request'
-alias pw='tmuxinator start practicewell'
-alias classic='tmuxinator start classic'
-alias elm='docker run -it --rm -v "$(pwd):/code" -w "/code" -e "HOME=/tmp" -u $UID:$GID -p 8000:8000 elm'
+alias sic='sudo snap install --classic'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -159,13 +157,8 @@ export PATH="/usr/local/opt/qt/bin:$PATH"
 export PATH="/usr/local/opt/mysql-client/bin:$PATH"
 export PATH="/snap/bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
-export PATH="$(npm bin):$PATH"
+#export PATH="$(npm bin):$PATH"
 
-#export GOROOT=/snap/go/current
-#export GOPATH=$HOME/src/go
-#export GOBIN=$GOROOT/bin
-#export GOARCH=amd64
-#export GOOS=linux
-#export PATH=$GOBIN:$PATH
+export PATH="$HOME/.rbenv/bin:$PATH"
 
 eval "$(rbenv init -)"
