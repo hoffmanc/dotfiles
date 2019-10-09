@@ -73,7 +73,8 @@ alias elm='docker run -it --rm -v "$(pwd):/code" -w "/code" -e "HOME=/tmp" -u $U
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-alias dk="docker-compose"
+#alias dk="docker-compose"
+alias dk='docker-compose -f ~/src/picomes/pico-docker/docker-compose.yml'
 alias rlog="docker logs --tail=300 -f medu-relier_app_1"
 
 # Alias definitions.
@@ -158,5 +159,13 @@ export PATH="/usr/local/opt/qt/bin:$PATH"
 export PATH="/usr/local/opt/mysql-client/bin:$PATH"
 export PATH="/snap/bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
+export PATH="$(npm bin):$PATH"
+
+#export GOROOT=/snap/go/current
+#export GOPATH=$HOME/src/go
+#export GOBIN=$GOROOT/bin
+#export GOARCH=amd64
+#export GOOS=linux
+#export PATH=$GOBIN:$PATH
 
 eval "$(rbenv init -)"
