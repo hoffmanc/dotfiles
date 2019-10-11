@@ -34,4 +34,3 @@ windows:
         - logs:
           - dk logs -f
         - bash
-
