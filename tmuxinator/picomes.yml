@@ -27,10 +27,8 @@ root: ~/src/picomes
 windows:
   - editor:
       pre: dk up -d
-      layout: main-vertical
+      layout: 8a33,282x84,0,0{88x84,0,0,0,193x84,89,0,2}
       panes:
-        - editor:
-          - vim
-        - logs:
-          - dk logs -f
-        - bash
+        - date
+        - vim
+  - nuc: ssh chris-test-nuc

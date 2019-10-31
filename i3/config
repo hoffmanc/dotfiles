@@ -195,3 +195,5 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
 exec --no-startup-id setup_monitors
+
+exec xautolock -time 15 -locker i3lock

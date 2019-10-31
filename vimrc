@@ -122,20 +122,25 @@ endfunction
 
 function! TestType()
   if !exists('g:test_type')
-    let rspec = system('grep rspec Gemfile')
-    let spring_rspec = system('grep spring-commands-rspec Gemfile')
-    if empty(rspec)
-      let rails_version = system('rails -v')
-      if empty(matchstr(rails_version, " 5"))
-        let g:test_type = 'rails'
-      else
-        let g:test_type = 'rails5'
-      endif
+    let filename = expand("%") 
+    if filename =~? '.go$'
+      let g:test_type = 'go'
     else
-      if empty(spring_rspec)
-        let g:test_type = 'bundle exec rspec '
+      let rspec = system('grep rspec Gemfile')
+      let spring_rspec = system('grep spring-commands-rspec Gemfile')
+      if empty(rspec)
+        let rails_version = system('rails -v')
+        if empty(matchstr(rails_version, " 5"))
+          let g:test_type = 'rails'
+        else
+          let g:test_type = 'rails5'
+        endif
       else
-        let g:test_type = 'bundle exec rspec '
+        if empty(spring_rspec)
+          let g:test_type = 'bundle exec rspec '
+        else
+          let g:test_type = 'bundle exec rspec '
+        end
       end
     end
   end
@@ -144,15 +149,16 @@ endfunction
 
 function! RunAll()
   let test_type = TestType()
-  if test_type == "rails"
-    "let cmd = "ruby -Itest"
-    let cmd = "bin/rake test TEST="
+  if test_type == "go"
+    let cmd = "go test -run "
+    let cmd = cmd . "Test" . strpart(expand("%:t"),0,strlen(expand("%:t")) - 8)
+  elseif test_type == "rails"
+    let cmd = "bin/rake test TEST=" . expand("%")
   elseif test_type == "rails5"
-    let cmd = "rails test TEST="
+    let cmd = "rails test TEST=" . expand("%")
   else
-    let cmd = test_type
+    let cmd = test_type . expand("%")
   endif
-  let cmd = cmd . expand("%")
   call TmuxRun(cmd)
 endfunction
 
@@ -215,3 +221,4 @@ let g:elm_format_autosave = 1
 " Kill trailing whitespace
 autocmd FileType c,cpp,java,php,ruby,css,js,javascript.jsx,coffee,dockerfile autocmd BufWritePre <buffer> :%s/\s\+$//e
 set background=dark
+let g:go_fmt_command = "goimports"
