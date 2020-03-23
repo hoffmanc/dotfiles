@@ -10,6 +10,7 @@
 	singleKey = yes
 [alias]
   a = add
+  ap = add -p
   prune = remote prune origin
   r = rebase
 	rc = rebase --continue # faster rebasing
@@ -19,7 +20,7 @@
   co = checkout
   cm = commit -m 
   m = merge
-  p = push origin HEAD # pushes current branch to origin w/ same name
+  p = push -u origin HEAD # pushes current branch to origin w/ same name
   pforce = push origin +HEAD
   pdel = push origin --delete
   b = branch

@@ -220,5 +220,12 @@ let g:elm_format_autosave = 1
 
 " Kill trailing whitespace
 autocmd FileType c,cpp,java,php,ruby,css,js,javascript.jsx,coffee,dockerfile autocmd BufWritePre <buffer> :%s/\s\+$//e
+
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.css,*.json,*.md,*.yaml,*.html Prettier
+
 set background=dark
 let g:go_fmt_command = "goimports"
+
+nnoremap <leader>n :set paste<CR>
+nnoremap <leader>N :set nopaste<CR>

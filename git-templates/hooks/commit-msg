@@ -9,8 +9,11 @@
 commit_msg = File.read(ARGV[0])
 branch = `git rev-parse --abbrev-ref HEAD`
 
-if ticket_id = branch[/(?:[A-Z]*-)\d+$/]
-  ticket_id.prepend("#") unless ticket_id =~ /^[A-Z]/
+ticket_id ||= branch[/-[a-z0-9]{6}$/i][1..-1]
+ticket_id ||= branch[/(?:[A-Z]+-)?\d+$/]
+ticket_id ||= branch[%r{^[a-z]+/(\d+)}]
+
+if ticket_id
   new_commit_msg = "#{commit_msg.strip} [#{ticket_id}]\n"
   File.write(ARGV[0], new_commit_msg)
 end

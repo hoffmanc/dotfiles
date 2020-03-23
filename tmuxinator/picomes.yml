@@ -1,7 +1,7 @@
 # ~/.tmuxinator/default.yml
 
 name: picomes
-root: ~/src/picomes
+root: ~/src
 
 # Optional tmux socket
 # socket_name: foo
@@ -25,10 +25,10 @@ root: ~/src/picomes
 # post: tmux -CC attach -t default
 
 windows:
-  - editor:
-      pre: dk up -d
-      layout: 8a33,282x84,0,0{88x84,0,0,0,193x84,89,0,2}
+  - main:
+      root: ~/src/
+      layout: 5cec,363x101,0,0{80x101,0,0[80x50,0,0,0,80x50,0,51,22],282x101,81,0,9}
       panes:
-        - date
+        - while true; do dk logs -f; sleep 5; done
+        - dk up -d && dk ps
         - vim
-  - nuc: ssh chris-test-nuc
