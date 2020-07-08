@@ -9,7 +9,8 @@
 commit_msg = File.read(ARGV[0])
 branch = `git rev-parse --abbrev-ref HEAD`
 
-ticket_id ||= branch[/-[a-z0-9]{6}$/i][1..-1]
+b = branch[/-[a-z0-9]{6}$/i]
+ticket_id ||= b && b[1..-1]
 ticket_id ||= branch[/(?:[A-Z]+-)?\d+$/]
 ticket_id ||= branch[%r{^[a-z]+/(\d+)}]
 

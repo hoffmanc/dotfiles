@@ -196,4 +196,5 @@ bindsym XF86AudioPrev exec playerctl previous
 
 exec --no-startup-id setup_monitors
 
-exec xautolock -time 15 -locker i3lock
+exec xautolock -time 30 -locker i3lock
+exec --no-startup-id feh --bg-fill ~/Pictures/satellite-planet-space-station.jpg

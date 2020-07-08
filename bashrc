@@ -19,7 +19,7 @@ shopt -s histappend
 export HISTFILE=$HOME/.bash_history
 export HISTSIZE=10000000000
 export HISTFILESIZE=2000000000
-export PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
+export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -71,9 +71,12 @@ alias sic='sudo snap install --classic'
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-#alias dk="docker-compose"
-alias dk='docker-compose -f ~/src/picomes/pico-docker/docker-compose.yml'
-alias rlog="docker logs --tail=300 -f medu-relier_app_1"
+#alias dk='docker-compose -f ~/src/pico-docker/docker-compose.yml'
+alias dkreup='dk up -d --force-recreate --no-deps'
+alias dkrebuild='dk build --pull --no-cache'
+alias epoch="date +%s"
+alias ymd="date +%Y-%m-%d"
+alias dkreseed='dk up seeding && dk restart mes'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -162,3 +165,11 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
 
 eval "$(rbenv init -)"
+export GOROOT="/usr/local/go"
+export PATH="$GOROOT/bin:$PATH"
+export PATH="$PATH:$GOPATH/bin"
+export GOOGLE_APPLICATION_CREDENTIALS="/home/hoffmanc/src/picomes/backups/pico-mes-60611504bf8d-hoffmanc-test-backup.json"
+
+if [[ -n "$PS1" ]] && [[ -z "$TMUX" ]] && [[ -n "$SSH_CONNECTION" ]]; then
+  tmux attach-session -t picomes || tmux new-session -s picomes
+fi

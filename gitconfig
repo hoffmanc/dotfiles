@@ -14,7 +14,7 @@
   prune = remote prune origin
   r = rebase
 	rc = rebase --continue # faster rebasing
-  ri = rebase -i origin/master
+  ri = rebase -i
   cpc = cherry-pick --continue
   s = status
   co = checkout

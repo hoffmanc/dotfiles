@@ -1,2 +1,2 @@
 #!/bin/bash
-scrot -s ~/foo.png && xclip -selection c -t image/png < ~/foo.png
+rm ~/foo.png; scrot -s ~/foo.png && xclip -selection c -t image/png < ~/foo.png

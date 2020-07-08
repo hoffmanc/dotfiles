@@ -226,6 +226,7 @@ autocmd BufWritePre *.js,*.jsx,*.css,*.json,*.md,*.yaml,*.html Prettier
 
 set background=dark
 let g:go_fmt_command = "goimports"
+let g:go_rename_command = "gopls"
 
 nnoremap <leader>n :set paste<CR>
 nnoremap <leader>N :set nopaste<CR>
