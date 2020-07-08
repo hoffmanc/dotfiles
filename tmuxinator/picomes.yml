@@ -29,8 +29,8 @@ windows:
       root: ~/src/pico-react
       layout: 5cec,363x101,0,0{80x101,0,0[80x50,0,0,0,80x50,0,51,22],282x101,81,0,9}
       panes:
-        - while true; do dk logs -f mesassets accountassets; sleep 5; done
-        - 
+        - while true; do dk logs --tail=100 -f mesassets; sleep 5; done
+        - build/commonlsyncd.sh
         - vim
 
   #- cloud-funcs:
@@ -45,7 +45,7 @@ windows:
       root: ~/src/pico-docker
       layout: 5cec,363x101,0,0{80x101,0,0[80x50,0,0,0,80x50,0,51,22],282x101,81,0,9}
       panes:
-        - while true; do dk logs -f; sleep 5; done
+        - while true; do dk logs --tail=100 -f; sleep 5; done
         - dk up -d && dk ps
         - vim
 
@@ -61,7 +61,7 @@ windows:
       root: ~/src/pico-mes
       layout: 5cec,363x101,0,0{80x101,0,0[80x50,0,0,0,80x50,0,51,22],282x101,81,0,9}
       panes:
-        - while true; do dk logs -f mes; sleep 5; done
+        - while true; do dk logs --tail=100 -f mes; sleep 5; done
         - 
         - vim
 
@@ -69,6 +69,6 @@ windows:
       root: ~/src/pico-api
       layout: 5cec,363x101,0,0{80x101,0,0[80x50,0,0,0,80x50,0,51,22],282x101,81,0,9}
       panes:
-        - while true; do dk logs -f api rabbitmq apitest; sleep 10; sleep 5; done
+        - while true; do dk logs --tail=100 -f api rabbitmq apitest; sleep 10; sleep 5; done
         - 
         - vim
