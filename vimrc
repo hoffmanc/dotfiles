@@ -1,9 +1,29 @@
-execute pathogen#infect()
-
 set hidden
 set nocompatible
 filetype off
 syntax enable
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'fatih/vim-go'
+Plugin 'jpalardy/vim-slime'
+Plugin 'jremmen/vim-ripgrep'
+Plugin 'kien/ctrlp.vim'
+Plugin 'morhetz/gruvbox'
+Plugin 'mxw/vim-jsx'
+Plugin 'pangloss/vim-javascript'
+Plugin 'prettier/vim-prettier'
+Plugin 'SirVer/ultisnips'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-eunuch'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'VundleVim/Vundle.vim'
+call vundle#end()
+filetype plugin indent on " required
 
 " Set , as leader key
 let mapleader = ","
