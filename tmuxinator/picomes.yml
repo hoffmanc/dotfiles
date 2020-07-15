@@ -29,7 +29,7 @@ windows:
       root: ~/src/pico-react
       layout: 5cec,363x101,0,0{80x101,0,0[80x50,0,0,0,80x50,0,51,22],282x101,81,0,9}
       panes:
-        - while true; do dk logs --tail=100 -f mesassets; sleep 5; done
+        - while true; do watch -n 1 'dk logs -t --tail=20 mesassets | ansi2txt'; sleep 5; done
         - build/commonlsyncd.sh
         - vim
 

@@ -77,6 +77,7 @@ alias dkrebuild='dk build --pull --no-cache'
 alias epoch="date +%s"
 alias ymd="date +%Y-%m-%d"
 alias dkreseed='dk up seeding && dk restart mes'
+alias dockerips='docker ps | cut -f1 -d" " | tail -n+2 | while read container; do docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}	{{.Name}}" $container; done'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
