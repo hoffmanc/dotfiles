@@ -21,6 +21,8 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
+Plugin 'dense-analysis/ale'
+Plugin 'godlygeek/tabular'
 Plugin 'VundleVim/Vundle.vim'
 call vundle#end()
 filetype plugin indent on " required
@@ -242,11 +244,68 @@ let g:elm_format_autosave = 1
 autocmd FileType c,cpp,java,php,ruby,css,js,javascript.jsx,coffee,dockerfile autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.jsx,*.css,*.json,*.md,*.yaml,*.html Prettier
+" autocmd BufWritePre *.js,*.jsx,*.css,*.json,*.md,*.yaml,*.html Prettier
 
 set background=dark
 let g:go_fmt_command = "goimports"
 let g:go_rename_command = "gopls"
+let g:go_highlight_diagnostic_warnings = 0
 
 nnoremap <leader>n :set paste<CR>
 nnoremap <leader>N :set nopaste<CR>
+
+let s:last_go_run = ""
+
+function! g:CurrentGoSuiteTest()
+  let s:last_go_run = "./..."
+  call g:LastGoFileTest()
+endfunc
+nnoremap <leader>rs :call g:CurrentGoSuiteTest()<CR><C-L>
+
+function! g:CurrentGoFuncTest()
+  let temp = system("~/src/pico-mes/testReducer -file " . expand("%") . " -line " . line("."))
+  let s:last_go_run = substitute(temp, '\n', '', 'g')
+  call g:LastGoFileTest()
+endfunc
+nnoremap <leader>rl :call g:CurrentGoFuncTest()<CR><C-L>
+
+function! g:LastGoFileTest()
+  :execute "! tmux send -t :mes.0 'clear' Enter"
+  :execute "! tmux send -t :mes.0 'dk exec -e GIN_MODE=release mes_test go test " . s:last_go_run . " -v' Enter"
+endfunc
+nnoremap <leader>rr :call g:LastGoFileTest()<CR><C-L>
+
+" ale
+let g:ale_lint_delay = 1000
+let g:ale_linters = { 'rust': ['cargo', 'rls'] }
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'bash': ['shellcheck'],
+\   'c': ['clang'],
+\   'cpp': ['clang'],
+\   'css': ['prettier'],
+\   'graphql': ['prettier'],
+\   'go': ['gofmt'],
+\   'html': ['tidy', 'tidy'],
+\   'javascript': ['prettier', 'eslint'],
+\   'json': ['prettier', 'fixjson'],
+\   'markdown': ['prettier'],
+\   'rust': ['rustfmt'],
+\   'svg': ['tidy'],
+\   'typescript': ['prettier', 'eslint'],
+\   'vim': ['vimls'],
+\}
+let g:ale_rust_rls_toolchain = 'stable'
+let g:ale_completion_enabled = 1
+let g:ale_completion_autoimport = 1
+let g:ale_fix_on_save = 1
+
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript
+autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.css,*.json,*.md Prettier
+
+nnoremap <silent> <leader>f :ALEFix<cr>
+nnoremap <silent> <leader>I :ALEGoToDefinition -split<cr>
+nnoremap <silent> <leader>i :ALEDetail<cr>
+
+inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-TAB>"

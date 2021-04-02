@@ -74,10 +74,14 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 #alias dk='docker-compose -f ~/src/pico-docker/docker-compose.yml'
 alias dkreup='dk up -d --force-recreate --no-deps'
 alias dkrebuild='dk build --pull --no-cache'
+alias dkvreup='dk rm -fsv $1 && dk build --no-cache $1 && dk up --force-recreate --no-deps -d $1'
+
 alias epoch="date +%s"
 alias ymd="date +%Y-%m-%d"
 alias dkreseed='dk up seeding && dk restart mes'
 alias dockerips='docker ps | cut -f1 -d" " | tail -n+2 | while read container; do docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}	{{.Name}}" $container; done'
+alias dc='docker-compose'
+alias dkrepg='dk stop postgres && dk rm postgres && docker volume rm pico-docker_postgresdata && dk up -d --force-recreate --no-deps postgres'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like

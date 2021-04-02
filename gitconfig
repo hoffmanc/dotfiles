@@ -23,8 +23,9 @@
   p = push -u origin HEAD # pushes current branch to origin w/ same name
   pforce = push origin +HEAD
   pdel = push origin --delete
-  b = branch
+  b = branch --sort=-committerdate
   f = fetch -p
+  l = log --oneline --graph
   url =! bash -c 'git config --get remote.origin.url | sed -E "s/.+:\\(.+\\)\\.git$/https:\\\\/\\\\/github\\\\.com\\\\/\\\\1/g"'
   patch = add -p
   resume = reset HEAD^
