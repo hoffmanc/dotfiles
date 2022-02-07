@@ -19,7 +19,7 @@ shopt -s histappend
 export HISTFILE=$HOME/.bash_history
 export HISTSIZE=10000000000
 export HISTFILESIZE=2000000000
-export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+#export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -54,7 +54,7 @@ fi
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# some more ls aliases
+# some more aliases
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
@@ -66,6 +66,7 @@ alias rollback='rails db:rollback && RAILS_ENV=test rails db:rollback'
 alias redo='rails db:migrate:redo && RAILS_ENV=test rails db:migrate:redo'
 alias hpr='hub pull-request'
 alias sic='sudo snap install --classic'
+alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -82,6 +83,7 @@ alias dkreseed='dk up seeding && dk restart mes'
 alias dockerips='docker ps | cut -f1 -d" " | tail -n+2 | while read container; do docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}	{{.Name}}" $container; done'
 alias dc='docker-compose'
 alias dkrepg='dk stop postgres && dk rm postgres && docker volume rm pico-docker_postgresdata && dk up -d --force-recreate --no-deps postgres'
+alias dkredbt='dk up mes-migrations mes-migrations-test; until dk run --rm dbt dbt run --full-refresh; do sleep 1; done && until dk run --rm dbt-test dbt run --full-refresh; do sleep 1; done && dk restart data-api data-api-test'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -108,7 +110,7 @@ fi
 export PATH="$HOME/.bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 
-export EDITOR=vi
+export EDITOR=nvim
 
 export PATH="$HOME/.linuxbrew/bin:$PATH"
 export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
@@ -144,6 +146,7 @@ PERL_MB_OPT="--install_base \"$HOME/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
 
 export NO_AT_BRIDGE=1 # http://unix.stackexchange.com/questions/230238/starting-x-applications-from-the-terminal-and-the-warnings-that-follow
+export WLR_NO_HARDWARE_CURSORS=1
 
 export TERMINFO=~/.terminfo
 
@@ -153,28 +156,35 @@ export DOCKER_CLIENT_TIMEOUT=120
 
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/hoffmanc/Downloads/google-cloud-sdk/path.bash.inc' ]; then source '/home/hoffmanc/Downloads/google-cloud-sdk/path.bash.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/home/hoffmanc/Downloads/google-cloud-sdk/completion.bash.inc' ]; then source '/home/hoffmanc/Downloads/google-cloud-sdk/completion.bash.inc'; fi
-
 export PATH="$HOME/go/bin:$PATH"
 
-export PATH="/usr/local/opt/qt/bin:$PATH"
-export PATH="/usr/local/opt/mysql-client/bin:$PATH"
-export PATH="/snap/bin:$PATH"
-export PATH="$HOME/.rbenv/bin:$PATH"
+#export PATH="/usr/local/opt/qt/bin:$PATH"
+#export PATH="/usr/local/opt/mysql-client/bin:$PATH"
 #export PATH="$(npm bin):$PATH"
 
 export PATH="$HOME/.rbenv/bin:$PATH"
-
 eval "$(rbenv init -)"
+export PATH="$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+
 export GOROOT="/usr/local/go"
+export GO111MOD="on"
 export PATH="$GOROOT/bin:$PATH"
-export PATH="$PATH:$GOPATH/bin"
+
+#export PATH="$PATH:$GOPATH/bin"
 export GOOGLE_APPLICATION_CREDENTIALS="/home/hoffmanc/src/picomes/backups/pico-mes-60611504bf8d-hoffmanc-test-backup.json"
+
+export CLOUDSDK_PYTHON=/usr/bin/python2
 
 if [[ -n "$PS1" ]] && [[ -z "$TMUX" ]] && [[ -n "$SSH_CONNECTION" ]]; then
   tmux attach-session -t picomes || tmux new-session -s picomes
 fi
+
+. ~/.bin/z.sh
+source /usr/share/nvm/init-nvm.sh
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/hoffmanc/Downloads/gcp/google-cloud-sdk/path.bash.inc' ]; then . '/home/hoffmanc/Downloads/gcp/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/hoffmanc/Downloads/gcp/google-cloud-sdk/completion.bash.inc' ]; then . '/home/hoffmanc/Downloads/gcp/google-cloud-sdk/completion.bash.inc'; fi

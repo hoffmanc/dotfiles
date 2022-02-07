@@ -4,6 +4,8 @@ filetype off
 syntax enable
 
 " set the runtime path to include Vundle and initialize
+" git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'fatih/vim-go'
@@ -23,6 +25,8 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'dense-analysis/ale'
 Plugin 'godlygeek/tabular'
+Plugin 'jasonccox/vim-wayland-clipboard'
+Plugin 'jparise/vim-graphql'
 Plugin 'VundleVim/Vundle.vim'
 call vundle#end()
 filetype plugin indent on " required
@@ -57,10 +61,17 @@ let g:wakatime_ScreenRedraw = 1
 "
 "
 " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+" let g:ctrlp_user_command = 'rg %s -l'
 " ag is fast enough that CtrlP doesn't need to cache
-let g:ctrlp_use_caching = 0
-
+"
+if executable('rg')
+  set grepprg=rg\ --color=never
+  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+  let g:ctrlp_use_caching = 0
+else
+  let g:ctrlp_clear_cache_on_exit = 0
+endif
+ 
 "" Ctrl-P and ack.vim settings
 "let g:ctrlp_max_height = 20
 "if executable('ag')
@@ -262,6 +273,12 @@ function! g:CurrentGoSuiteTest()
 endfunc
 nnoremap <leader>rs :call g:CurrentGoSuiteTest()<CR><C-L>
 
+function! g:CurrentGoFileTest()
+  let s:last_go_run = expand("%")
+  call g:LastGoFileTest()
+endfunc
+nnoremap <leader>rf :call g:CurrentGoFileTest()<CR><C-L>
+
 function! g:CurrentGoFuncTest()
   let temp = system("~/src/pico-mes/testReducer -file " . expand("%") . " -line " . line("."))
   let s:last_go_run = substitute(temp, '\n', '', 'g')
@@ -301,6 +318,7 @@ let g:ale_completion_autoimport = 1
 let g:ale_fix_on_save = 1
 
 autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript
+autocmd BufNewFile,BufRead *.graphql set filetype=graphql
 autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.css,*.json,*.md Prettier
 
 nnoremap <silent> <leader>f :ALEFix<cr>

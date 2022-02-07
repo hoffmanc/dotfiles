@@ -19,6 +19,7 @@
   s = status
   co = checkout
   cm = commit -m 
+  ca = commit --amend
   m = merge
   p = push -u origin HEAD # pushes current branch to origin w/ same name
   pforce = push origin +HEAD
@@ -37,6 +38,7 @@
   ff = false
 [init]
 	templatedir = ~/.git-templates
+	defaultBranch = main
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
