@@ -197,3 +197,5 @@ if [ -f '/home/hoffmanc/Downloads/gcp/google-cloud-sdk/path.bash.inc' ]; then . 
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/hoffmanc/Downloads/gcp/google-cloud-sdk/completion.bash.inc' ]; then . '/home/hoffmanc/Downloads/gcp/google-cloud-sdk/completion.bash.inc'; fi
+
+source $HOME/.env
