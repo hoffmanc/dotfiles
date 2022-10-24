@@ -1,5 +1,5 @@
 [user]
-	email = chris.c.hoffman@gmail.com
+	email = chris@picomes.com
 	name = Chris Hoffman
 [core]
 	excludesFile = /home/sir/.gitignore_global
@@ -18,7 +18,7 @@
   cpc = cherry-pick --continue
   s = status
   co = checkout
-  cm = commit -m 
+  cm = commit -m
   ca = commit --amend
   m = merge
   p = push -u origin HEAD # pushes current branch to origin w/ same name
@@ -30,8 +30,9 @@
   url =! bash -c 'git config --get remote.origin.url | sed -E "s/.+:\\(.+\\)\\.git$/https:\\\\/\\\\/github\\\\.com\\\\/\\\\1/g"'
   patch = add -p
   resume = reset HEAD^
-  logp = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-  slist =! better_stash_list
+  lg = log --graph --pretty=format:\"%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset\" --abbrev-commit
+  rl = reflog --pretty=format:\"%Cred%h%Creset %C(auto)%gd%Creset %C(auto)%gs%C(reset) %C(green)(%cr)%C(reset) %C(bold blue)<%an>%Creset\" --abbrev-commit
+  sl = stash list --pretty=format:\"%C(red)%h%C(reset) - %C(dim yellow)(%C(bold magenta)%gd%C(dim yellow))%C(reset) %<(70,trunc)%s %C(green)(%cr) %C(bold blue)<%an>%C(reset)\"
 [push]
 	default = simple # might be required for ^?
 [merge]

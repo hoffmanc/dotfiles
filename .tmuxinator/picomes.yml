@@ -42,21 +42,21 @@ windows:
         - while true; do dk logs --tail=100 -f mes account mes_test; sleep 5; done
         - nvim
 
-  - api:
-      root: ~/src/pico-api
-      layout: 5cec,363x101,0,0{80x101,0,0[80x50,0,0,0,80x50,0,51,22],282x101,81,0,9}
-      panes:
-        - dk up -d api
-        - while true; do dk logs --tail=100 -f api rabbitmq apitest; sleep 10; sleep 5; done
-        - nvim
+  # - api:
+  #     root: ~/src/pico-api
+  #     layout: 5cec,363x101,0,0{80x101,0,0[80x50,0,0,0,80x50,0,51,22],282x101,81,0,9}
+  #     panes:
+  #       - dk up -d api
+  #       - while true; do dk logs --tail=100 -f api rabbitmq apitest; sleep 10; sleep 5; done
+  #       - nvim
 
-  - cloud-funcs:
-      root: ~/src/pico-cloud-funcs
-      layout: 5cec,363x101,0,0{80x101,0,0[80x50,0,0,0,80x50,0,51,22],282x101,81,0,9}
-      panes:
-        -
-        -
-        - nvim
+  # - cloud-funcs:
+  #     root: ~/src/pico-cloud-funcs
+  #     layout: 5cec,363x101,0,0{80x101,0,0[80x50,0,0,0,80x50,0,51,22],282x101,81,0,9}
+  #     panes:
+  #       -
+  #       -
+  #       - nvim
 
   - docker:
       root: ~/src/pico-docker
@@ -66,44 +66,47 @@ windows:
         - while true; do dk logs --tail=100 -f; sleep 5; done
         - nvim
 
-  - hub:
-      root: ~/src/pico-hub
-      layout: 5cec,363x101,0,0{80x101,0,0[80x50,0,0,0,80x50,0,51,22],282x101,81,0,9}
-      panes:
-        # - dk up -d hub
-        - dk up -d hubble
-        - while true; do dk logs -f hubble; sleep 5; done
-        # - while true; do dk exec hub journalctl -f; sleep 5; done
-        - nvim
+  # - hub:
+  #     root: ~/src/pico-hub
+  #     layout: 5cec,363x101,0,0{80x101,0,0[80x50,0,0,0,80x50,0,51,22],282x101,81,0,9}
+  #     panes:
+  #       # - dk up -d hub
+  #       - dk up -d hubble
+  #       - while true; do dk logs -f hubble; sleep 5; done
+  #       # - while true; do dk exec hub journalctl -f; sleep 5; done
+  #       - nvim
 
-  - dbt:
-      root: ~/src/pico-dbt
-      layout: 2678,212x68,0,0{80x68,0,0[80x34,0,0,4,80x33,0,35,11],131x68,81,0,5}
-      panes:
-        -
-        - while true; do dk logs --tail=100 -f data-api data-api-test; sleep 5; done
-        - nvim
+  # - dbt:
+  #     root: ~/src/pico-dbt
+  #     layout: 2678,212x68,0,0{80x68,0,0[80x34,0,0,4,80x33,0,35,11],131x68,81,0,5}
+  #     panes:
+  #       -
+  #       - while true; do dk logs --tail=100 -f data-api data-api-test; sleep 5; done
+  #       - nvim
 
-  - odoo:
-      root: ~/src/pico-odoo
-      layout: 5cec,363x101,0,0{80x101,0,0[80x50,0,0,0,80x50,0,51,22],282x101,81,0,9}
-      panes:
-        - while true; do dc logs --tail=100 -f ; sleep 10; sleep 5; done
-        - dc up -d
-        - nvim
+  # - odoo:
+  #     root: ~/src/pico-odoo
+  #     layout: 5cec,363x101,0,0{80x101,0,0[80x50,0,0,0,80x50,0,51,22],282x101,81,0,9}
+  #     panes:
+  #       - while true; do dc logs --tail=100 -f ; sleep 10; sleep 5; done
+  #       - dc up -d
+  #       - nvim
 
-  - account:
-      root: ~/src/pico-account
-      layout: 5cec,363x101,0,0{80x101,0,0[80x50,0,0,0,80x50,0,51,22],282x101,81,0,9}
-      panes:
-        - while true; do dk logs --tail=100 -f account; sleep 10; sleep 5; done
-        -
-        - nvim
+  # - account:
+  #     root: ~/src/pico-account
+  #     layout: 5cec,363x101,0,0{80x101,0,0[80x50,0,0,0,80x50,0,51,22],282x101,81,0,9}
+  #     panes:
+  #       - while true; do dk logs --tail=100 -f account; sleep 10; sleep 5; done
+  #       -
+  #       - nvim
 
   - blog:
       root: ~/src/blog
       layout: 5cec,363x101,0,0{80x101,0,0[80x50,0,0,0,80x50,0,51,22],282x101,81,0,9}
       panes:
-        - hugoshell
-        - docker run --user 1000:1000 -p 1313:1313 --rm -it -v "${HOME}/src/blog/site/hoffmanc:/site" --entrypoint /bin/sh hugo serve --bind 0.0.0.0
+        - ./shell.sh
+        - ./start.sh
         - nvim
+
+  - services-10:
+      root: ~/src/pico-infrastructure

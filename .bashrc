@@ -19,7 +19,8 @@ shopt -s histappend
 export HISTFILE=$HOME/.bash_history
 export HISTSIZE=10000000000
 export HISTFILESIZE=2000000000
-#export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+
+# source ~/.local/bin/set-tmux-title
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -75,6 +76,10 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 #alias dk='docker-compose -f ~/src/pico-docker/docker-compose.yml'
 alias dkreup='dk up -d --force-recreate --no-deps'
 alias dkrebuild='dk build --pull --no-cache'
+function dk-recreate {
+  dk rm -fsv $1 && dk build --no-cache $1 && dk up --force-recreate --no-deps -d $1
+}
+
 alias dkvreup='dk rm -fsv $1 && dk build --no-cache $1 && dk up --force-recreate --no-deps -d $1'
 
 alias epoch="date +%s"
@@ -83,7 +88,11 @@ alias dkreseed='dk up seeding && dk restart mes'
 alias dockerips='docker ps | cut -f1 -d" " | tail -n+2 | while read container; do docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}	{{.Name}}" $container; done'
 alias dc='docker-compose'
 alias dkrepg='dk stop postgres && dk rm postgres && docker volume rm pico-docker_postgresdata && dk up -d --force-recreate --no-deps postgres'
-alias dkredbt='dk up mes-migrations mes-migrations-test; until dk run --rm dbt dbt run --full-refresh; do sleep 1; done && until dk run --rm dbt-test dbt run --full-refresh; do sleep 1; done && dk restart data-api data-api-test'
+alias dkredbt='dk up mes-migrations mes-migrations-test && until dk run --rm dbt dbt run --full-refresh; do sleep 1; done && until dk run --rm dbt-test dbt run --full-refresh; do sleep 1; done && dk restart data-api data-api-test'
+
+alias gcp='gcloud compute'
+alias gcpi='gcloud compute instances'
+alias gcpd='gcloud compute disks'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -162,8 +171,8 @@ export PATH="$HOME/go/bin:$PATH"
 #export PATH="/usr/local/opt/mysql-client/bin:$PATH"
 #export PATH="$(npm bin):$PATH"
 
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+#export PATH="$HOME/.rbenv/bin:$PATH"
+#eval "$(rbenv init -)"
 export PATH="$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 
@@ -172,7 +181,7 @@ export GO111MOD="on"
 export PATH="$GOROOT/bin:$PATH"
 
 #export PATH="$PATH:$GOPATH/bin"
-export GOOGLE_APPLICATION_CREDENTIALS="/home/hoffmanc/src/picomes/backups/pico-mes-60611504bf8d-hoffmanc-test-backup.json"
+export GOOGLE_APPLICATION_CREDENTIALS="/home/hoffmanc/.config/gcloud/pico-mes-719ded12da1e.json"
 
 export CLOUDSDK_PYTHON=/usr/bin/python2
 
