@@ -190,7 +190,7 @@ if [[ -n "$PS1" ]] && [[ -z "$TMUX" ]] && [[ -n "$SSH_CONNECTION" ]]; then
 fi
 
 . ~/.bin/z.sh
-source /usr/share/nvm/init-nvm.sh
+test -f /usr/share/nvm/init-nvm.sh && source /usr/share/nvm/init-nvm.sh
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/hoffmanc/Downloads/gcp/google-cloud-sdk/path.bash.inc' ]; then . '/home/hoffmanc/Downloads/gcp/google-cloud-sdk/path.bash.inc'; fi
@@ -198,4 +198,4 @@ if [ -f '/home/hoffmanc/Downloads/gcp/google-cloud-sdk/path.bash.inc' ]; then . 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/hoffmanc/Downloads/gcp/google-cloud-sdk/completion.bash.inc' ]; then . '/home/hoffmanc/Downloads/gcp/google-cloud-sdk/completion.bash.inc'; fi
 
-source $HOME/.env
+test -f $HOME/.env && source $HOME/.env
