@@ -67,7 +67,7 @@ alias rollback='rails db:rollback && RAILS_ENV=test rails db:rollback'
 alias redo='rails db:migrate:redo && RAILS_ENV=test rails db:migrate:redo'
 alias hpr='hub pull-request'
 alias sic='sudo snap install --classic'
-alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert

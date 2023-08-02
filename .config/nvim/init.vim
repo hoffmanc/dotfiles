@@ -6,7 +6,7 @@ syntax enable
 " set the runtime path to include Vundle and initialize
 " git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
-set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=~/.config/nvim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'fatih/vim-go'
 Plugin 'jpalardy/vim-slime'
@@ -27,6 +27,8 @@ Plugin 'dense-analysis/ale'
 Plugin 'godlygeek/tabular'
 Plugin 'jasonccox/vim-wayland-clipboard'
 Plugin 'jparise/vim-graphql'
+Plugin 'nvim-lua/plenary.nvim'
+Plugin 'nvim-telescope/telescope.nvim'
 Plugin 'VundleVim/Vundle.vim'
 call vundle#end()
 filetype plugin indent on " required
@@ -42,6 +44,14 @@ if has("termguicolors")
 endif
 
 colorscheme gruvbox
+
+lua << EOF
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+EOF
 
 " disable toolbar
 set guioptions-=T
