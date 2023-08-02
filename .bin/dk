@@ -5,4 +5,4 @@ then
   set -- exec postgres su - postgres -c psql
 fi
 
-docker-compose -f ~/src/pico-docker/docker-compose.yml -f ~/src/pico-docker/docker-compose.override.yml $@
+docker-compose $@
