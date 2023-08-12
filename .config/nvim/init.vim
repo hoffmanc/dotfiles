@@ -179,11 +179,7 @@ function! TestType()
           let g:test_type = 'rails5'
         endif
       else
-        if empty(spring_rspec)
-          let g:test_type = 'bundle exec rspec '
-        else
-          let g:test_type = 'bundle exec rspec '
-        end
+        let g:test_type = 'dk exec web rspec'
       end
     end
   end

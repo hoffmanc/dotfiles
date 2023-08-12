@@ -183,7 +183,7 @@ export PATH="$GOROOT/bin:$PATH"
 #export PATH="$PATH:$GOPATH/bin"
 export GOOGLE_APPLICATION_CREDENTIALS="/home/hoffmanc/.config/gcloud/pico-mes-719ded12da1e.json"
 
-export CLOUDSDK_PYTHON=/usr/bin/python2
+export CLOUDSDK_PYTHON=/usr/bin/python3
 
 if [[ -n "$PS1" ]] && [[ -z "$TMUX" ]] && [[ -n "$SSH_CONNECTION" ]]; then
   tmux attach-session -t picomes || tmux new-session -s picomes
