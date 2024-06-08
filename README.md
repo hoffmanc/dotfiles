@@ -1,3 +1,4 @@
+```
 git clone --bare https://github.com/hoffmanc/dotfiles.git $HOME/.cfg
 
 function config {
@@ -11,3 +12,4 @@ config checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} .conf
 
 config checkout
 config config status.showUntrackedFiles no
+```
